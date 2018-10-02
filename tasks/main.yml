@@ -1,0 +1,11 @@
+---
+
+- name: Create a Facebook test user
+  facebook_user:
+    access_token: "{{ access_token }}"
+    app_id: "{{ ansible_env.FACEBOOK_APP_ID }}"
+    state: present
+  register: response
+
+- debug:
+    var: response

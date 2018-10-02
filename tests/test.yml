@@ -1,0 +1,7 @@
+---
+
+- connection: local
+  gather_facts: yes
+  hosts: all
+  roles:
+    - ansible-modules-facebook-messenger
