@@ -4,8 +4,21 @@
   facebook_user:
     access_token: "{{ access_token }}"
     app_id: "{{ ansible_env.FACEBOOK_APP_ID }}"
+    permissions:
+      - manage_pages
+      - pages_messaging
+      - publish_actions
+      - publish_pages
     state: present
   register: response
 
 - debug:
     var: response
+
+- name: Delete Facebook test user
+  facebook_user:
+    access_token: "{{ response.json.access_token }}"
+    app_id: "{{ ansible_env.FACEBOOK_APP_ID }}"
+    state: absent
+    test_user_id: "{{ response.json.id }}"
+  when: response.json is defined
